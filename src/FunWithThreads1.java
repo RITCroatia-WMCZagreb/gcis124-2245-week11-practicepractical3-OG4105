@@ -1,17 +1,55 @@
+/*
+@ASSESSME.USERID: og3150
+@ASSESSME.AUTHOR: Omar Gradascevic
+@ASSESSME.DESCRIPTION: PRACTICE PRACTICAL 3
+@ASSESSME.ANALYZE: YES
+*/
+
+// 7,9,10,11 Lectures will be on Theory part of Exam
+
 public class FunWithThreads1 {
 
 
     //Constructor of FunWithThreads
     public FunWithThreads1(){
-        System.out.println("MAIN START");
-       
-        System.out.println("MAIN END");
+        System.out.println("MAIN Thread START");
+        
+        Thread t1 = new Thread(new MyThread("Thread 1"));
+        Thread t2 = new Thread(new MyThread("Thread 2"));
+
+        t1.start();
+        t2.start();
+
+        System.out.println("MAIN Thread END");
     }
 
     public static void main(String[] args) throws Exception {
         
         new FunWithThreads1();
 
+    }
+
+    class MyThread implements Runnable{
+
+        private String name="";
+        public MyThread(String name){
+            this.name=name;
+        }
+
+        @Override
+        public void run() {
+            for(int i=0;i<10;i++){
+                System.out.println(this.name + " "+ i);
+
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        
     }
 
     /*

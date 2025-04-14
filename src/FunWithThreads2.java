@@ -1,10 +1,29 @@
+/*
+@ASSESSME.USERID: og3150
+@ASSESSME.AUTHOR: Omar Gradascevic
+@ASSESSME.DESCRIPTION: PRACTICE PRACTICAL 3
+@ASSESSME.ANALYZE: YES
+*/
+
 public class FunWithThreads2 {
 
 
     //Constructor of FunWithThreads
     public FunWithThreads2(){
         System.out.println("MAIN START");
-        
+
+        Thread t1 = new Thread(new MyThread("Thread 1"));
+        Thread t2 = new Thread(new MyThread("Thread 2"));
+
+        t1.start();
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        t2.start();
+
         System.out.println("MAIN END");
     }
 
@@ -14,7 +33,30 @@ public class FunWithThreads2 {
 
     }
 
+    class MyThread implements Runnable{
 
+        private String name="";
+        public MyThread(String name){
+            this.name=name;
+        }
+
+        @Override
+        public void run() {
+            System.out.println("Thread start:"+this.name);
+            for(int i=0;i<10;i++){
+                
+                System.out.println(this.name + " "+ i);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("Thread end:"+this.name );
+        }
+        
+    }
 }
 
 /*
